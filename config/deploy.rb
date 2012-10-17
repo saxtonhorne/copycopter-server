@@ -1,18 +1,14 @@
 # To deploy to either production or staging with a non default branch please use the following.
 # staging: cap -s branch-$MY_BRANCH deploy
 # production: cap -s branch-$MY_BRANCH production deploy
-require 'capistrano/ext/multistage'
 require 'bundler/capistrano'
 require 'new_relic/recipes'
 load 'deploy/assets'
 
-set :application, "hi-chew"
-set :repository,  "git@github.com:saxtonhorne/hi-chew"
+set :application, "copycopter"
+set :repository,  "git@github.com:saxtonhorne/copycopter-server"
 
 set :scm, :git
-
-set :stages, %w(production staging)
-set :default_stage, :staging
 
 set :use_sudo, false
 set :user, "deploy"
@@ -21,10 +17,16 @@ set :group, "www-data"
 set :deploy_to, "/var/www/#{application}"
 set :deploy_via, :remote_cache
 set :deploy_env, 'production'
+set :rails_env, :production
+
+role :app, "copy.saxtonhorne.net" 
+role :web, "copy.saxtonhorne.net"
+role :db, "copy.saxtonhorne.net", :primary => true
+set :branch, "master"
 
 default_run_options[:pty] = true
 
-after "deploy:restart", "newrelic:notice_deployment"
+# after "deploy:restart", "newrelic:notice_deployment"
 after "deploy:restart", "deploy:cleanup"
 
 namespace :deploy do
