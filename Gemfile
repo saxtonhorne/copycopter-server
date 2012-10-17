@@ -11,6 +11,8 @@ gem 'thin', '1.3.1'
 gem 'yajl-ruby', '1.1.0', :require => 'yajl'
 gem "jquery-rails", "1.0.19"
 
+gem 'capistrano'
+
 group :assets do
   gem 'sass-rails', "~> 3.2.5"
   gem 'coffee-rails', "~> 3.2.1"
