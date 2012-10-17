@@ -6,3 +6,10 @@ development: &default
 test: &test
   <<: *default
   database: copycopter_test
+
+production:
+  adapter: postgresql
+  username: root
+  password:
+  database: copycopter_production
+  host: localhost
