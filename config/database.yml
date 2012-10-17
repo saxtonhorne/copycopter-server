@@ -9,7 +9,4 @@ test: &test
 
 production:
   adapter: postgresql
-  username: copycopter
-  password:
   database: copycopter_production
-  host: localhost
